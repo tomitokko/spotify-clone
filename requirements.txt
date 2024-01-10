@@ -3,11 +3,10 @@ beautifulsoup4==4.12.2
 bs4==0.0.1
 defusedxml==0.7.1
 dj-database-url==2.1.0
-Django==5.0
+Django==4.1.13
 django-allauth==0.54.0
 django-extensions==3.2.1
 django-googledrive-storage==1.6.0
-django-heroku==0.3.1
 django-storages==1.13.2
 gunicorn==21.2.0
 html5lib==1.1
@@ -18,7 +17,6 @@ Jinja2==3.1.2
 lxml==4.9.2
 multidict==6.0.4
 Pillow==9.4.0
-psycopg2==2.9.9
 psycopg2-binary==2.9.9
 python3-openid==3.2.0
 regex==2023.10.3
