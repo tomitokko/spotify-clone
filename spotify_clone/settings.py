@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'spotify_clone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'root',
-        'PASSWORD': 'BTabf36ky7ySN2bG',
-        'HOST': 'postgresql-rds-production-handy-elderberry-ensd.c0dfz2mpkykn.us-west-2.rds.amazonaws.com',
+        'NAME': 'YOUR-NAME',
+        'USER': 'YOUR-USER',
+        'PASSWORD': 'PASSWORD',
+        'HOST': 'YOUR-HOST',
         'PORT': 5432
     }
 }
@@ -139,8 +139,3 @@ STATICFILES_DIRS =  [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CSRF_TRUSTED_ORIGINS = ['https://m0undvj8qi.execute-api.us-west-2.amazonaws.com']
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
