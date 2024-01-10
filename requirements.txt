@@ -3,7 +3,7 @@ beautifulsoup4==4.12.2
 bs4==0.0.1
 defusedxml==0.7.1
 dj-database-url==2.1.0
-Django==5.0
+Django==4.1.13
 django-allauth==0.54.0
 django-extensions==3.2.1
 django-googledrive-storage==1.6.0
