@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artist Profile</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'profile-style.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.4/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+
+    .artist-header {
+      background-image: url('https://cdn.punchng.com/wp-content/uploads/2023/05/20120536/Rema.jpeg');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+    }
+
+  </style>
+</head>
+<body class="bg-black text-white flex">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Spotify Logo -->
+    <div class="logo-container">
+        <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" alt="Spotify Logo" style="width: 100%; height: auto; padding: 20px; box-sizing: border-box;">
+    </div>
+
+    <!-- Welcome User -->
+    <div class="sidebar-section">
+        <span style="margin-left: 14px;" class="sidebar-link-icon">👤</span>
+        <b>Welcome, {{user.username}}</b>
+        <br>
+        <br>
+
+        <a href="/logout">
+            <span class="sidebar-link-icon">↪️</span>
+            <b>Logout</b>
+        </a>
+    </div>
+
+    <!-- Top section of the sidebar -->
+    <div class="sidebar-section">
+        <a href="/" class="sidebar-link active">
+            <span class="sidebar-link-icon">🏠</span>
+            Home
+        </a>
+        <a href="/search" class="sidebar-link">
+            <span class="sidebar-link-icon">🔍</span>
+            Search
+        </a>
+    </div>
+
+</div>
+
+  <!-- Main Content -->
+  <div class="flex-1">
+      
+    <!-- Artist Header -->
+    <div class="relative">
+      <!-- Increased height with inline style -->
+      <img src="{{headerUrl}}" alt="{{name}}" style="height: 600px; object-fit: cover; width: 100%;">
+      <div class="absolute bottom-0 p-5 w-full" style="background: rgba(0, 0, 0, 0.5);">
+        <div class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
+            <!-- Your SVG path for the verified icon -->
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.1c-3.374 0-6.1-2.726-6.1-6.1 0-3.374 2.726-6.1 6.1-6.1 3.374 0 6.1 2.726 6.1 6.1 0 3.374-2.726 6.1-6.1 6.1zm3.95-8.95l-4.4 4.4-2.1-2.1-1.45 1.45 3.55 3.55 5.85-5.85-1.45-1.45z"/>
+          </svg>
+          <span class="text-sm text-gray-300 ml-1">Verified Artist</span>
+        </div>
+        <h1 class="text-5xl font-bold text-white mt-2">{{name}}</h1>
+        <p class="text-gray-300">{{monthlyListeners}} monthly listeners</p>
+      </div>
+    </div>
+    
+    
+    <!-- Popular Tracks Section -->
+    <div class="p-5">
+      <h2 class="text-2xl font-bold mb-4">Songs</h2>
+      <div class="divide-y divide-gray-800">
+        <!-- Single Track Row -->
+        {% for track in topTracks %}
+        <div class="grid grid-cols-3 items-center py-3">
+          <div class="flex items-center space-x-4">
+            <img src="{{track.track_image}}" alt="Song Image" class="w-12 h-12">
+            <div>
+              <a href="/music/{{track.id}}">
+                <p class="text-base font-medium">{{track.name}}</p>
+                <p class="text-xs text-gray-400">{{name}}</p>
+              </a>
+            </div>
+          </div>
+          <div class="justify-self-end text-gray-400">{{track.playCount}}</div>
+          <div class="justify-self-end text-gray-400">{{track.durationText}}</div>
+        </div>
+        {% endfor %}
+        <!-- Repeat for other tracks -->
+      </div>
+      <!-- <a href="#" class="text-green-500 text-sm">See more</a> -->
+    </div>
+    
+  </div>
+
+</body>
+</html>

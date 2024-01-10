@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artist Profile</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'search-style.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.4/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+
+    .artist-header {
+      background-image: url('https://cdn.punchng.com/wp-content/uploads/2023/05/20120536/Rema.jpeg');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+    }
+
+  </style>
+</head>
+<body class="bg-black text-white flex">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Spotify Logo -->
+    <div class="logo-container">
+        <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" alt="Spotify Logo" style="width: 100%; height: auto; padding: 20px; box-sizing: border-box;">
+    </div>
+
+    <!-- Welcome User -->
+    <div class="sidebar-section">
+        <span style="margin-left: 14px;" class="sidebar-link-icon">👤</span>
+        <b>Welcome, {{user.username}}</b>
+        <br>
+        <br>
+
+        <a href="/logout">
+            <span class="sidebar-link-icon">↪️</span>
+            <b>Logout</b>
+        </a>
+    </div>
+
+    <!-- Top section of the sidebar -->
+    <div class="sidebar-section">
+        <a href="/" class="sidebar-link active">
+            <span class="sidebar-link-icon">🏠</span>
+            Home
+        </a>
+        <a href="/search" class="sidebar-link">
+            <span class="sidebar-link-icon">🔍</span>
+            Search
+        </a>
+    </div>
+
+</div>
+
+
+
+
+  <!-- Main Content -->
+  <div class="flex-1">
+      
+    <br>
+    <br>
+    <header class="header-container">
+        <form action="search" method="POST">
+            {% csrf_token %}
+
+            <div class="search-bar" style="width: 390px;">
+                <input type="search" name="search_query" placeholder="What do you want to listen to?" aria-label="Search">
+                <button type="submit" aria-label="Search">
+                    🔍
+                </button>
+            </div>
+        </form>
+    </header>
+    
+    <!-- Popular Tracks Section -->
+    <div class="p-5">
+      <br>
+      <h2 class="text-2xl font-bold mb-4">Search Results ({{search_results_count}} results)</h2>
+      <div class="divide-y divide-gray-800">
+        <!-- Single Track Row -->
+        {% for track in track_list %}
+        <div class="flex justify-between items-center py-3">
+          <div class="flex items-center space-x-4">
+            <img src="{{track.track_image}}" alt="{{track.track_name}}" class="w-12 h-12">
+            <div>
+              <a href="/music/{{track.trackid}}">
+                <p class="text-base font-medium">{{track.track_name}}</p>
+                <p class="text-xs text-gray-400">{{track.artist_name}}</p>
+              </a>
+            </div>
+          </div>
+          <div class="text-gray-400">{{track.duration}}</div>
+        </div>
+        {% endfor %}
+        <!-- Repeat for other tracks -->
+      </div>
+      <!-- <a href="#" class="text-green-500 text-sm">See more</a> -->
+    </div>
+    
+  </div>
+
+</body>
+</html>

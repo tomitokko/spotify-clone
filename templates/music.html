@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Streaming Service</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<body style="margin:0; padding:0; background:#121212; font-family:Arial, sans-serif; color:#fff;">
+    <!-- Sidebar remains unchanged -->
+    <div class="sidebar">
+        <!-- Spotify Logo -->
+        <div class="logo-container">
+            <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" alt="Spotify Logo" style="width: 100%; height: auto; padding: 20px; box-sizing: border-box;">
+        </div>
+
+        <!-- Welcome User -->
+        <div class="sidebar-section">
+            <span style="margin-left: 14px;" class="sidebar-link-icon">👤</span>
+            <b>Welcome, {{user.username}}</b>
+            <br>
+            <br>
+
+            <a href="/logout">
+                <span class="sidebar-link-icon">↪️</span>
+                <b>Logout</b>
+            </a>
+        </div>
+
+        <!-- Top section of the sidebar -->
+        <div class="sidebar-section">
+            <a href="/" class="sidebar-link active">
+                <span class="sidebar-link-icon">🏠</span>
+                Home
+            </a>
+            <a href="/search" class="sidebar-link">
+                <span class="sidebar-link-icon">🔍</span>
+                Search
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Main content area where we will add the music player -->
+    <div class="music-player" style="margin-left:240px; padding:20px; display: flex; justify-content: center; align-items: center; height: calc(100vh - 90px);">
+        <!-- Music Player Interface -->
+        <div class="player-container">
+            <br><br><br><br><br>
+            <img class="album-cover" src="{{track_image}}" alt="Album Cover">
+            <div class="song-info">
+                <h2 class="song-title">{{track_name}}</h2>
+                <h3 class="artist-name">{{artist_name}}</h3>
+            </div>
+            <div class="player-controls">
+                <button id="prev" class="control-btn">&#9668;</button>
+                <button id="play-pause" class="control-btn play-btn">&#9658;</button>
+                <button id="next" class="control-btn">&#9658;</button>
+            </div>
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div class="time-stamps">
+                <span id="current-time">0:00</span>
+                <span id="total-duration">{{duration_text}}</span>
+            </div>
+        </div>
+    
+        <audio id="audio-player" src="{{audio_url}}"></audio>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audio-player');
+        const playPauseBtn = document.getElementById('play-pause');
+        const progressBar = document.getElementById('progress-bar');
+        const progress = document.getElementById('progress');
+        const currentTimeElement = document.getElementById('current-time');
+        const totalDurationElement = document.getElementById('total-duration');
+        
+        playPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseBtn.innerHTML = '&#10074;&#10074;'; // Change to pause icon
+            } else {
+                audioPlayer.pause();
+                playPauseBtn.innerHTML = '&#9658;'; // Change to play icon
+            }
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            const progressPercentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progress.style.width = `${progressPercentage}%`;
+            
+            // Update current time text
+            const currentMinutes = Math.floor(audioPlayer.currentTime / 60);
+            const currentSeconds = Math.floor(audioPlayer.currentTime - currentMinutes * 60);
+            currentTimeElement.textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
+        });
+
+        progressBar.addEventListener('click', (e) => {
+            const progressBarWidth = progressBar.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audioPlayer.duration;
+            
+            audioPlayer.currentTime = (clickX / progressBarWidth) * duration;
+        });
+
+        // Move forward 10 seconds
+        document.getElementById('next').addEventListener('click', () => {
+            audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 10);
+        });
+        
+
+        // Move back 10 seconds
+        document.getElementById('prev').addEventListener('click', () => {
+            audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
+        });
+    </script>
+
+</body>
+</html>

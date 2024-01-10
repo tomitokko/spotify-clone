@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Streaming Service</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<body style="margin:0; padding:0; background:#121212; font-family:Arial, sans-serif; color:#fff;">
+    <div class="sidebar">
+        <!-- Spotify Logo -->
+        <div class="logo-container">
+            <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" alt="Spotify Logo" style="width: 100%; height: auto; padding: 20px; box-sizing: border-box;">
+        </div>
+
+        <!-- Welcome User -->
+        <div class="sidebar-section">
+            <span style="margin-left: 14px;" class="sidebar-link-icon">👤</span>
+            <b>Welcome, {{user.username}}</b>
+            <br>
+            <br>
+
+            <a href="/logout">
+                <span class="sidebar-link-icon">↪️</span>
+                <b>Logout</b>
+            </a>
+        </div>
+
+        <!-- Top section of the sidebar -->
+        <div class="sidebar-section">
+            <a href="/" class="sidebar-link active">
+                <span class="sidebar-link-icon">🏠</span>
+                Home
+            </a>
+            <a href="/search" class="sidebar-link">
+                <span class="sidebar-link-icon">🔍</span>
+                Search
+            </a>
+        </div>
+
+    </div>
+
+    <div style="margin-left:240px; padding:20px;">
+        <header class="header-container">
+            <form action="search" method="POST">
+                {% csrf_token %}
+
+                <div class="search-bar" style="width: 390px;">
+                    <input type="search" name="search_query" placeholder="What do you want to listen to?" aria-label="Search">
+                    <button type="submit" aria-label="Search">
+                        🔍
+                    </button>
+                </div>
+            </form>
+            <div class="search-title">Top Artists</div>
+        </header>
+
+
+        <main style="padding-top:20px;">
+            <section style=" margin-top:0px; padding:0px; overflow-x:auto; white-space:nowrap;">
+                <!-- Artist Card -->
+                {% for artist in artists_info %}
+                <div class="artist-card">
+                    <a href="/profile/{{artist.2}}" style="text-decoration: none;">
+                        <img src="{{artist.1}}" alt="{{artist.0}}" style="width:150px; height:150px; border-radius:50%;">
+                        <div class="artist-info">
+                            <div class="artist-name">{{artist.0}}</div>
+                            <div class="artist-title">Artist</div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </section>
+            <!-- Repeat sections for other categories with more content cards -->
+          
+          <!-- "Browse All" Section Title -->
+          <div class="browse-all-title">Top Songs</div>
+
+          <!-- "Browse All" Section Content -->
+          
+
+        <div class="browse-all">
+            <!-- Category Card -->
+
+            {% for track in first_six_tracks %}
+            <div class="category-card">
+                <a style="text-decoration: none; color: white;" href="/music/{{track.id}}">
+                    <img src="{{track.cover_url}}" alt="{{track.name}}">
+                    <div class="category-title">{{track.name}}</div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="browse-all">
+            <!-- Category Card -->
+            {% for track in second_six_tracks %}
+            <div class="category-card">
+                <a style="text-decoration: none; color: white;" href="/music/{{track.id}}">
+                    <img src="{{track.cover_url}}" alt="{{track.name}}">
+                    <div class="category-title">{{track.name}}</div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="browse-all">
+            <!-- Category Card -->
+            {% for track in third_six_tracks %}
+            <div class="category-card">
+                <a style="text-decoration: none; color: white;" href="/music/{{track.id}}">
+                    <img src="{{track.cover_url}}" alt="{{track.name}}">
+                    <div class="category-title">{{track.name}}</div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        </main>
+
+    </div>
+    
+</body>
+</html>

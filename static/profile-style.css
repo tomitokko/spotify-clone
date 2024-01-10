@@ -1,0 +1,108 @@
+.artist-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 2rem;
+  }
+  
+  .artist-info {
+    color: white;
+  }
+  
+  .verified-badge {
+    color: #1DB954;
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .sidebar {
+      flex-basis: 250px;
+      flex-shrink: 0;
+    }
+  
+    .main-content {
+      flex-grow: 1;
+    }
+  }
+  
+  
+  
+   /* Sidebar Styles */
+   .sidebar {
+    background-color: #000;
+    width: 240px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Navigation Sidebar Styles */
+  .sidebar {
+    color: #b3b3b3;
+    padding: 25px 10px;
+    font-size: 14px;
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 5px 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar a:hover,
+  .sidebar a.active {
+    background-color: #282828;
+  }
+  
+  /* Sidebar Styles */
+  
+  
+  /* Sidebar Bottom Section Styles */
+  .sidebar-section {
+    background: #181818;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 9px;
+    overflow: hidden;
+  }
+  
+  .sidebar-link {
+    color: #b3b3b3;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  
+  .sidebar-link:hover,
+  .sidebar-link.active {
+    color: #fff;
+  }
+  
+  .sidebar-link-icon {
+    margin-right: 15px;
+    display: inline-block;
+    width: 24px; /* Adjust size as needed */
+    text-align: center;
+  }
+  
+  .sidebar-link-text {
+    flex-grow: 1;
+  }
+  
+  .sidebar-link-subtext {
+    margin-left: 10px;
+    background-color: #b3b3b3;
+    color: #000;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }

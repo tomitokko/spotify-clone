@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.4/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-black h-screen flex flex-col items-center justify-center">
+  <div class="w-full max-w-xs px-6">
+    <div class="mb-10 flex flex-col items-center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png" alt="Spotify Logo" class="w-20 h-20">
+      <h1 class="text-4xl text-white font-bold mt-2">Spotify</h1>
+    </div>
+
+
+    <div>
+        <style>
+            h5{
+                color: red;
+            }
+        </style>
+        
+        {% for message in messages %}
+        <h5>{{message}}</h5>
+        {% endfor %}
+    </div>
+
+
+    <form action="" method="POST" class="bg-black">
+      {% csrf_token %}
+
+      <div class="mb-4">
+        <input class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" type="text" name="username" placeholder="Username">
+      </div>
+      <div class="mb-6">
+        <input class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" type="password" name="password" placeholder="Password">
+      </div>
+      <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full mb-4">Sign In</button>
+      <p class="text-center text-gray-400 text-xs">
+        Don't have an account?<a href="/signup" class="text-green-500"> Sign up</a>
+      </p>
+    </form>
+
+    <p class="text-center text-gray-500 text-xs mt-4">
+      &copy; Spotify
+    </p>
+  </div>
+</body>
+</html>
